@@ -1,10 +1,15 @@
 package com.satisdrms.wsServer;
 
-public class searchText {
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
+import javax.jws.soap.SOAPBinding.Style;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+@WebService
+@SOAPBinding(style = Style.RPC)
+public interface searchText {
 
-	}
+	@WebMethod
+	String getGreeting(String name);
 
 }
