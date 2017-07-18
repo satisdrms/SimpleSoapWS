@@ -1,0 +1,58 @@
+<head>
+<title>Calling Text Search</title>
+<script type="text/javascript" language="JavaScript">
+	service = document.getElementById("ViewLink");
+
+	function InitializeService() {
+		service.useService('http://localhost:1234/ws/RunService', "AddService");
+	}
+	var regtype, regvalue;
+	function registerUser() {
+		a = document.getElementById("Text1").value;
+		b = document.getElementById("Text2").value;
+
+		service.AddService.callService("add", a, b);
+	}
+	function ShowResult() {
+		alert(event.result.value);
+	}
+
+	function fun() {
+		var data = "hello";
+		$.get("http://localhost:1234/ws/RunService/helloworld", {},
+				function(response) {
+					data = response;
+				}).error(function() {
+			alert("Sorry could not proceed");
+		});
+
+		return data;
+	}
+
+	function fun1() {
+		$.ajax({
+			url : "http://localhost:1234/ws/RunService",
+			data : "", //ur data to be sent to server
+			contentType : "application/json; charset=utf-8",
+			type : "GET",
+			success : function(data) {
+				alert(data);
+			},
+			error : function(x, y, z) {
+				alert(x.responseText + "  " + x.status);
+			}
+		});
+	}
+</script>
+</head>
+<body onload="InitializeService()" id="service">
+	<a id="ViewLink" href="http://" onclick="registerUser()"
+		style="behavior: url(webservice.htc);" onresult="onmyresult();"> <font
+		color=maroon>Call</font></a>
+	<input id="Text1" type="number" />
+	<input id="Text2" type="number" />
+	<input id="Button1" type="button" value="Add" onclick="registerUser();" />
+	<input type="button" value="Submit" id="btn_submit"
+		onclick="return fun1()">
+
+</body>
